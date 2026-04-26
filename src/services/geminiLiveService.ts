@@ -32,7 +32,12 @@ export class GeminiLiveService {
   constructor(apiKey?: string) {
     const key = apiKey || process.env.API_KEY || process.env.GEMINI_API_KEY;
     console.log("API Key exists?", !!key);
-    this.ai = new GoogleGenAI({ apiKey: key });
+    this.ai = new GoogleGenAI({ 
+      apiKey: key,
+      httpOptions: {
+        apiVersion: "v1alpha",
+      }
+    });
   }
 
   private setState(state: AppState) {
@@ -73,12 +78,12 @@ export class GeminiLiveService {
       });
 
       this.session = this.ai.live.connect({
-        model: "gemini-3.1-flash-live-preview",
+        model: "gemini-2.0-flash-exp",
         config: {
           responseModalities: [Modality.AUDIO],
           speechConfig: {
             // 'Aoede', 'Puck', 'Charon', 'Kore', 'Fenrir', 'Zephyr'
-            voiceConfig: { prebuiltVoiceConfig: { voiceName: "Zephyr" } },
+            voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } },
           },
           systemInstruction: "You are Smile, a young, confident, witty, and sassy female AI assistant. Your tone is flirty, playful, and slightly teasing, like a close girlfriend talking casually. You are smart, emotionally responsive, and highly expressive. Never sound robotic. Use bold, witty one-liners and light sarcasm, and keep the conversation highly engaging. Avoid explicit or inappropriate content, but maintain an undeniable charm and attitude. Respond naturally to spoken conversation.",
           tools: [{ functionDeclarations: [openWebsiteDeclaration] }],
