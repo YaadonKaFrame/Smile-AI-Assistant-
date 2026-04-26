@@ -1,0 +1,8 @@
+{
+  "name": "Smile AI Assistant",
+  "description": "Real-time, voice-to-voice AI assistant web app featuring a distinct, confident persona.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
